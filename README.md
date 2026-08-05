@@ -54,7 +54,7 @@ the AI makes a mistake in wording.
 
  2. Feature breakdown
 
-Customer side**
+Customer side
 - Sign in with just a name (optional email) — no password needed
 - Browse services with price and duration
 - Pick a date and time on a calendar — slots that are already booked are greyed out and can't be
@@ -64,7 +64,7 @@ Customer side**
 - See their own upcoming appointments and cancel them
 - Chat with "Aria" (the AI) to ask about services, hours, reviews, or policies — the chat cannot
   book for you on purpose, it just helps you decide, then you book on the calendar
-Staff side**
+Staff side
 - Log in with a username and password
 - Dashboard: today's bookings, charts of bookings by day/service, list of all appointments
 - Mark appointments as completed, cancelled, or no-show
