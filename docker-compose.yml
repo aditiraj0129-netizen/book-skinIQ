@@ -1,0 +1,64 @@
+version: "3.9"
+
+services:
+  postgres:
+    # pgvector/pgvector ships the pgvector extension pre-installed on top of
+    # standard Postgres, so switching VECTOR_STORE_BACKEND=pgvector in the
+    # backend's .env needs no extra image/setup step — the extension is
+    # simply available to `CREATE EXTENSION vector;`.
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appointments
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/appointments
+      JWT_SECRET: ${JWT_SECRET:-please-change-me}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      XAI_API_KEY: ${XAI_API_KEY:-}
+      XAI_MODEL: ${XAI_MODEL:-grok-4}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      VECTOR_STORE_BACKEND: ${VECTOR_STORE_BACKEND:-faiss}
+      FRONTEND_ORIGIN: http://localhost:5173
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - backend_faiss_data:/app/data
+    command: >
+      sh -c "python -m app.seed &&
+             python -m app.build_rag_index &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  backend_faiss_data:

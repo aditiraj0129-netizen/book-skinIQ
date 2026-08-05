@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.db
+.venv/
+venv/
+.env
+*.egg-info/
+
+# Node / frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# RAG index (rebuilt on demand)
+backend/data/faiss_index/
+
+# OS / editor
+.DS_Store
+*.log
+.vscode/*.log
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Bright Studio design tokens — a boutique appointment ticket, not a SaaS dashboard */
+  --color-ink: #17203a;
+  --color-ink-soft: #2c3654;
+  --color-linen: #f6f1e7;
+  --color-linen-soft: #efe7d8;
+  --color-paper: #fffcf6;
+  --color-brass: #b8862e;
+  --color-brass-soft: #d9b876;
+  --color-sage: #5f7a5c;
+  --color-sage-soft: #e4ebe1;
+  --color-rust: #a1432e;
+  --color-rust-soft: #f2ded8;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --animate-drift: drift 8s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-typing: typing-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-linen);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body,
+html.dark body {
+  background: var(--color-ink);
+  color: var(--color-linen);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ticket-stub signature component: perforated edge via repeating radial gradient "punches" */
+.ticket-perforation {
+  position: relative;
+  height: 1px;
+  background-image: radial-gradient(circle, var(--color-linen) 3px, transparent 3.5px);
+  background-size: 14px 1px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+.ticket-perforation::before,
+.ticket-perforation::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--color-linen);
+}
+.ticket-perforation::before { left: -8px; }
+.ticket-perforation::after { right: -8px; }
+
+.ticket-perforation-dark::before,
+.ticket-perforation-dark::after {
+  background: var(--color-ink);
+}
+.ticket-perforation-dark {
+  background-image: radial-gradient(circle, var(--color-ink) 3px, transparent 3.5px);
+  background-size: 14px 1px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 2px;
+}
