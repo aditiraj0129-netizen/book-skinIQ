@@ -6,7 +6,8 @@ their business (hours, services) by chatting with an AI assistant.
 
 ---
 
- Part 1: Problem Understanding
+ Part 1: Problem Understanding:
+ 
 Many small businesses, like skincare clinics or beauty studios, spend a lot of time answering phone calls and messages just to book appointments. Customers usually don't know which time slots are available, so they have to wait for a reply or keep asking until they find a free time.
 
 Our system makes this process simple. Customers can visit the website, see the available services, check real-time open slots on the calendar, and book an appointment instantly without calling or messaging anyone. They can also ask the AI assistant questions about business hours, service prices, reviews, or booking policies. After choosing a time, they just enter their name and email, and they receive a booking confirmation with an **"Add to Calendar"** button. Customers can also sign in using only their name to view their upcoming appointments or cancel them if needed.
