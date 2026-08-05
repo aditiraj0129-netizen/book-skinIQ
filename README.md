@@ -72,7 +72,7 @@ Staff side
   Facial Peel, 30 min, $45" and the business updates immediately
 - A manual settings form as a backup, in case staff prefer clicking instead of typing
 
-Behind the scenes**
+Behind the scenes
 - Real double-booking prevention (checked in the database, not just in the AI's head)
 - Business hours are stored in the database and can change live, without restarting anything
 - If the AI (Grok) isn't connected, the whole app still works using simple rule-based logic
@@ -134,7 +134,7 @@ Tech stack
 
  Which AI model, and why
 
-We used **Grok (xAI)** as the main conversational model, connected through LangChain.
+We used Grok (xAI) as the main conversational model, connected through LangChain.
 
 - LangChain was chosen because it gives a ready-made, well-tested way to let an AI model call
   "tools" (functions) safely, and it makes it easy to swap AI providers later without rewriting
